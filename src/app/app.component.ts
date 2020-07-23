@@ -1,31 +1,28 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectorRef, ElementRef } from '@angular/core';
-import { ChildComponent } from './child.component';
+import { Component, ViewChild, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent implements AfterViewInit  {
-  @ViewChild(ChildComponent) child: ChildComponent;
-  message: string;
-
-  inputR: ElementRef;
+export class AppComponent implements OnInit  {
+  inputRef: ElementRef;
+  showInput: boolean;
   @ViewChild('myName') set inputContent(inputContent: ElementRef) {
     if (inputContent) {
-      this.inputR = inputContent;
-      this.inputR.nativeElement.value = 'Input created with ViewChild setter';
-      console.log(this.inputR);
+      this.inputRef = inputContent;
+      this.inputRef.nativeElement.value = 'Input created with ViewChild setter with *ngIf';
     }
   }
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngAfterViewInit() {
-    // this.message = this.hello && this.hello.message; // this.hello?.message
-    // this.changeDetectorRef.detectChanges();
+  ngOnInit() {
+    setTimeout(() => {
+      this.showInput = true;
+    }, 500);
   }
 
 }
 
+// inspiration f
 // https://stackoverflow.com/questions/39366981/viewchild-in-ngif

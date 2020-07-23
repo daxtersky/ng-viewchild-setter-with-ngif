@@ -1,4 +1,7 @@
 <h1>App component</h1>
-<h2><child></child></h2>
-<span> Message from Hello Component: {{ message }}</span>
-<input #myName>
+<div *ngIf="showInput">
+  <input #myName style="width: 300px">
+</div>
+<div *ngIf="!showInput">
+  <span>loading...</span>
+</div>
